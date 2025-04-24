@@ -1,0 +1,13 @@
+services:
+  sgcc_electricity:
+    container_name: sgcc_electricity
+    env_file:
+      - .env
+    # for use docker.io: arcw/sgcc_electricity:latest
+    image: registry.cn-hangzhou.aliyuncs.com/arcw/sgcc_electricity:latest
+    init: true
+    network_mode: host
+    restart: unless-stopped
+    volumes:
+      # if you want to read homeassistant.db, homeassistant.db is in the container at /data/
+      - ./data:/data

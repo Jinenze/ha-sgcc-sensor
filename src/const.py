@@ -17,4 +17,3 @@ MONTH_USAGE_SENSOR_NAME = "sensor.month_electricity_usage"
 MONTH_CHARGE_SENSOR_NAME = "sensor.month_electricity_charge"
 BALANCE_UNIT = "CNY"
 USAGE_UNIT = "KWH"
-

@@ -82,9 +82,9 @@ def get_transparency_location(image):
 class DataFetcher:
 
     def __init__(self, username: str, password: str):
-        if 'PYTHON_IN_DOCKER' not in os.environ: 
-            import dotenv
-            dotenv.load_dotenv(verbose=True)
+        # if 'PYTHON_IN_DOCKER' not in os.environ: 
+        #     import dotenv
+        #     dotenv.load_dotenv(verbose=True)
         self._username = username
         self._password = password
         self.onnx = ONNX("./captcha.onnx")

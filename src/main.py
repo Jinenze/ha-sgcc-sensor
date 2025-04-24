@@ -12,10 +12,6 @@ from data_fetcher import DataFetcher
 
 def main():
     global RETRY_TIMES_LIMIT
-    if 'PYTHON_IN_DOCKER' not in os.environ: 
-        # 读取 .env 文件
-        import dotenv
-        dotenv.load_dotenv(verbose=True)
     if os.path.isfile('/data/options.json'):
         with open('/data/options.json') as f:
             options = json.load(f)
@@ -25,7 +21,6 @@ def main():
             HASS_URL = options.get("HASS_URL")
             JOB_START_TIME = options.get("JOB_START_TIME", "07:00")
             LOG_LEVEL = options.get("LOG_LEVEL", "INFO")
-            VERSION = os.getenv("VERSION")
             RETRY_TIMES_LIMIT = int(options.get("RETRY_TIMES_LIMIT", 5))
 
             logger_init(LOG_LEVEL)
@@ -42,7 +37,7 @@ def main():
             os.environ["RECHARGE_NOTIFY"] = str(options.get("RECHARGE_NOTIFY", "false")).lower()
             os.environ["BALANCE"] = str(options.get("BALANCE", 5.0))
             os.environ["PUSHPLUS_TOKEN"] = options.get("PUSHPLUS_TOKEN", "")
-            logging.info(f"当前以Homeassistant Add-on 形式运行.")
+            logging.info(f"Currently running as Homeassistant Add-on.")
         except Exception as e:
             logging.error(f"Failing to read the options.json file, the program will exit with an error message: {e}.")
             sys.exit()
@@ -53,7 +48,6 @@ def main():
             HASS_URL = os.getenv("HASS_URL")
             JOB_START_TIME = os.getenv("JOB_START_TIME","07:00" )
             LOG_LEVEL = os.getenv("LOG_LEVEL","INFO")
-            VERSION = os.getenv("VERSION")
             RETRY_TIMES_LIMIT = int(os.getenv("RETRY_TIMES_LIMIT", 5))
             
             logger_init(LOG_LEVEL)
@@ -62,7 +56,6 @@ def main():
             logging.error(f"Failing to read the .env file, the program will exit with an error message: {e}.")
             sys.exit()
 
-    logging.info(f"The current repository version is {VERSION}, and the repository address is https://github.com/ARC-MX/sgcc_electricity_new.git")
     current_datetime = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
     logging.info(f"The current date is {current_datetime}.")
 
